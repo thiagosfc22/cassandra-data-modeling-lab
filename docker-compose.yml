@@ -1,0 +1,16 @@
+services:
+  cassandra:
+    image: cassandra:5.0
+    container_name: cassandra-lab
+    ports:
+      - "9042:9042"
+    environment:
+      - CASSANDRA_CLUSTER_NAME=lab
+      # Small heap: this is a laptop study cluster, not production.
+      - MAX_HEAP_SIZE=512M
+      - HEAP_NEWSIZE=128M
+    healthcheck:
+      test: ["CMD-SHELL", "cqlsh -e 'describe keyspaces' || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 12
