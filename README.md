@@ -1,5 +1,7 @@
 # Cassandra Data Modeling Lab
 
+[🇧🇷 Português](README.pt-BR.md) · **🇬🇧 English**
+
 A hands-on lab for the part of Cassandra that trips up everyone coming from SQL:
 you don't model your data and then query it — you model your data **around the
 query**. No joins, no ad-hoc `WHERE`, denormalize on purpose. Get that one shift
@@ -29,6 +31,11 @@ no join to reassemble it later, so you decide the shape up front.
 | **Tunable consistency** | Per-query consistency levels; `W + R > RF` guarantees a consistent read with no leader. | [`examples/03_consistency_levels.py`](examples/03_consistency_levels.py) |
 | **Lightweight transactions** | Compare-and-set via Paxos (`IF NOT EXISTS`) — correct, but expensive; use sparingly. | [`examples/05_lightweight_transactions.py`](examples/05_lightweight_transactions.py) |
 | **Anti-patterns** | Large partitions, `ALLOW FILTERING`, bad secondary indexes, tombstone pileups. | [`schema/99_antipatterns.cql`](schema/99_antipatterns.cql) |
+
+<p align="center">
+  <img src="docs/tunable-consistency.png" width="520" alt="With RF=3, a QUORUM write reaches 2 nodes and a QUORUM read reaches 2 nodes; since W + R > RF the two sets always overlap on at least one node that holds the latest write.">
+  <br><em>Tunable consistency at a glance — why W + R &gt; RF gives a consistent read with no leader (<a href="examples/03_consistency_levels.py">03_consistency_levels.py</a>).</em>
+</p>
 
 ## Why writes are cheap and reads need good modeling
 
